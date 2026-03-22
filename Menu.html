@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Menu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+
+<nav>
+<h1>Pinoy Eats</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+
+<!-- MAIN COURSE -->
+<div class="section">
+<h2>Main Course</h2>
+
+<div class="cards">
+
+<div class="card selectable">
+    <img src="adobo.jpg">
+    <div class="card-content">
+        <h3>Adobo</h3>
+		<p class="price">₱150</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+<div class="card selectable">
+    <img src="Sinigang.jpg">
+    <div class="card-content">
+        <h3>Sinigang</h3>
+		<p class="price">₱160</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+<div class="card selectable">
+    <img src="kare.jpg">
+    <div class="card-content">
+        <h3>Kare-Kare</h3>
+		<p class="price">₱170</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+<div class="card selectable">
+    <img src="lechon.jpg">
+    <div class="card-content">
+        <h3>Lechon</h3>
+		<p class="price">₱200</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+<div class="card selectable">
+    <img src="menudo.jpg">
+    <div class="card-content">
+        <h3>Menudo</h3>
+		<p class="price">₱140</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+
+</div>
+</div>
+
+<!-- POPULAR -->
+<div class="section">
+<h2>Popular</h2>
+<div class="cards">
+
+<div class="card selectable">
+    <img src="sisig.jpg">
+    <div class="card-content">
+        <h3>Sisig</h3>
+		<p class="price">₱150</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+<div class="card selectable">
+    <img src="pancit.jpg">
+    <div class="card-content">
+        <h3>Pancit</h3>
+		<p class="price">₱130</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+<div class="card selectable">
+    <img src="lumpia.jpg">
+    <div class="card-content">
+        <h3>Lumpia</h3>
+		<p class="price">₱120</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+</div>
+</div>
+
+<!-- SPECIAL -->
+<div class="section">
+<h2>Special</h2>
+
+<div class="cards">
+
+<div class="card selectable">
+    <img src="Leche Flan.jpg">
+    <div class="card-content">
+        <h3>Leche Flan</h3>
+		<p class="price">₱100</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+<div class="card selectable">
+    <img src="bibingka.jpg">
+    <div class="card-content">
+        <h3>Bibingka</h3>
+		<p class="price">₱90</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+<div class="card selectable">
+    <img src="puto.jpg">
+    <div class="card-content">
+        <h3>Puto bumbong</h3>
+		<p class="price">₱95</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+
+<!-- DESSERT -->
+<div class="section">
+<h2>Desserts</h2>
+
+<div class="cards">
+
+<div class="card selectable">
+    <img src="halo.jpg">
+    <div class="card-content">
+        <h3>Halo-Halo</h3>
+		<p class="price">₱110</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+<div class="card selectable">
+    <img src="Mais.jpg">
+    <div class="card-content">
+        <h3> Mais con yelo </h3>
+		<p class="price">₱90</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+<div class="card selectable">
+    <img src="Turon.jpg">
+    <div class="card-content">
+        <h3>Turon</h3>
+		<p class="price">₱80</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+<div class="card selectable">
+    <img src="ube cake.jpg">
+    <div class="card-content">
+        <h3>Ube Cake</h3>
+		<p class="price">₱120</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+<div class="card selectable">
+    <img src="buko salad.jpg">
+    <div class="card-content">
+        <h3>Buko salad</h3>
+		<p class="price">₱100</p>
+        <button class="order-btn">Order Now</button>
+    </div>
+</div>
+
+
+
+</div>
+</div>
+
+<script>
+
+
+document.addEventListener("DOMContentLoaded", function(){
+
+    const cards = document.querySelectorAll(".selectable");
+
+    cards.forEach(card => {
+
+        const btn = card.querySelector(".order-btn");
+
+        
+        btn.style.display = "none";
+
+        card.addEventListener("click", function(){
+
+            
+            cards.forEach(c => {
+                c.classList.remove("selected");
+                c.querySelector(".order-btn").style.display = "none";
+            });
+
+            
+            card.classList.add("selected");
+
+            
+            btn.style.display = "inline-block";
+        });
+
+        
+        btn.addEventListener("click", function(e){
+    e.stopPropagation();
+
+    const name = card.querySelector("h3").innerText;
+    const img = card.querySelector("img").getAttribute("src");
+    const price = parseInt(card.querySelector(".price").innerText.replace("₱",""));
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push({
+        name: name,
+        img: img,
+        price: price,
+        qty: 1
+    });
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    updateCartCount();
+
+    alert("Added to cart!");
+});
+
+    });
+
+});
+</script>
+
+<div class="cart-icon" onclick="goToCart()">
+🛒 <span id="cart-count">0</span>
+</div>
+
+<script>
+function goToCart(){
+    window.location.href = "cart.html";
+}
+
+function updateCartCount(){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = document.getElementById("cart-count");
+    count.innerText = cart.length;
+
+    const cartIcon = document.querySelector(".cart-icon");
+    cartIcon.classList.add("animate");
+
+    setTimeout(() => {
+        cartIcon.classList.remove("animate");
+    }, 400);
+}
+
+updateCartCount();
+</script>
+
+</body>
+</html>

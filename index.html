@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pinoy Eats</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<script>
+const menuData = {
+    main: [
+        {name:"Adobo", img:"adobo.jpg", price:150},
+        {name:"Sinigang", img:"sinigang.jpg", price:160},
+        {name:"Kare-Kare", img:"kare.jpg", price:170},
+        {name:"Lechon", img:"lechon.jpg", price:200},
+        {name:"Menudo", img:"menudo.jpg", price:140}
+    ],
+    popular: [
+        {name:"Sisig", img:"sisig.jpg", price:150},
+        {name:"Pancit", img:"pancit.jpg", price:130},
+        {name:"Lumpia", img:"lumpia.jpg", price:120}
+    ],
+    special: [
+        {name:"Leche Flan", img:"Leche Flan.jpg", price:100},
+        {name:"Bibingka", img:"Bibingka.jpg", price:90},
+        {name:"Puto Bumbong", img:"puto.jpg", price:95}
+    ],
+    dessert: [
+        {name:"Halo-Halo", img:"halo.jpg", price:110},
+        {name:"Mais Con Yelo", img:"mais.jpg", price:90},
+        {name:"Turon", img:"turon.jpg", price:80},
+        {name:"Ube Cake", img:"ube cake.jpg", price:120},
+        {name:"Buko Salad", img:"buko salad.jpg", price:100}
+    ],
+    drinks: [
+        {name:"Buko Juice", img:"buko juice.jpg", price:70},
+        {name:"Sago't Gulaman", img:"SG.jpg", price:60},
+        {name:"Calamansi Juice", img:"Calamansi.png", price:65},
+        {name:"Iced Tea", img:"Tea.jpg", price:50},
+        {name:"Coffee", img:"coffe.jpg", price:80}
+    ]
+};
+
+function showCategory(category){
+    const container = document.getElementById("menu-items");
+    container.innerHTML = "";
+
+    menuData[category].forEach(food => {
+        container.innerHTML += `
+        <div class="card selectable" onclick="orderNow('${food.name}','${food.img}',${food.price})">
+            <img src="${food.img}">
+            <div class="card-content">
+                <h3>${food.name}</h3>
+                <p class="price">₱${food.price}</p>
+            </div>
+        </div>
+        `;
+    });
+
+    document.getElementById("menu-title").innerText = category.toUpperCase();
+
+    document.getElementById("menu-items").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function orderNow(name, img, price){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existing = cart.find(item => item.name === name);
+
+    if(existing){
+        existing.qty += 1;
+    } else {
+        cart.push({
+            name: name,
+            img: img,
+            price: price,
+            qty: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+
+    alert(name + " added to cart!");
+}
+</script>
+
+<div class="cart-icon" onclick="goToCart()">
+🛒 <span id="cart-count">0</span>
+</div>
+
+<script>
+function goToCart(){
+    window.location.href = "cart.html";
+}
+
+function updateCartCount(){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const count = document.getElementById("cart-count");
+    count.innerText = cart.length;
+
+    const cartIcon = document.querySelector(".cart-icon");
+    cartIcon.classList.add("animate");
+
+    setTimeout(() => {
+        cartIcon.classList.remove("animate");
+    }, 400);
+}
+
+updateCartCount();
+</script>
+
+<body>
+
+<!-- NAVBAR -->
+<nav>
+<h1>Pinoy Eats</h1>
+
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+
+<!-- TITLE (LEFT STYLE) -->
+<div class="top-title">
+<h2>Simple Filipino Recipes for Everyday Life</h2>
+</div>
+
+<!-- FOOD SHOWCASE -->
+<div class="food-grid">
+
+<div class="food-card" onclick="showCategory('main')">
+<img src="adobo.jpg">
+<div class="tag">Main Course</div>
+</div>
+
+<div class="food-card" onclick="showCategory('popular')">
+<img src="sinigang.jpg">
+<div class="tag">Popular</div>
+</div>
+
+<div class="food-card" onclick="showCategory('special')">
+<img src="Leche Flan.jpg">
+<div class="tag">Special</div>
+</div>
+
+<div class="food-card" onclick="showCategory('dessert')">
+<img src="halo.jpg">
+<div class="tag">Desserts</div>
+</div>
+
+<div class="food-card" onclick="showCategory('drinks')">
+<img src="Lemon.jpg">
+<div class="tag">Drinks</div>
+</div>
+
+</div>
+
+<div class="section">
+<h2 id="menu-title">Menu (Select)</h2>
+
+<div id="menu-items" class="cards"></div>
+</div>
+
+<!-- SECTION -->
+<div class="section">
+<h2>Welcome</h2>
+<p>Discover our website that is about small business consisting of Traditional Filipino foods!!</p>
+</div>
+
+<footer>
+<p>Pinoy Eats</p>
+</footer>
+
+
+
+</body>
+</html>

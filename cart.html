@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+<h1>Pinoy Eats</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+
+<div class="section">
+<h2>Your Cart</h2>
+
+<div id="cart-items"></div>
+
+<h3>Total: ₱<span id="total">0</span></h3>
+
+<button class="btn" onclick="checkout()">Checkout</button>
+<p id="msg"></p>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let container = document.getElementById("cart-items");
+
+function renderCart(){
+    container.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+
+        total += item.price * item.qty;
+
+        container.innerHTML += `
+        <div class="card">
+            <img src="${item.img}">
+            <div class="card-content">
+                <h3>${item.name}</h3>
+                <p>₱${item.price}</p>
+
+                <button onclick="changeQty(${index}, -1)">-</button>
+                ${item.qty}
+                <button onclick="changeQty(${index}, 1)">+</button>
+
+                <br><br>
+                <button onclick="removeItem(${index})" class="btn">Remove</button>
+            </div>
+        </div>
+        `;
+    });
+
+    document.getElementById("total").innerText = total;
+}
+
+function changeQty(i, change){
+    cart[i].qty += change;
+    if(cart[i].qty < 1) cart[i].qty = 1;
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+function removeItem(i){
+    cart.splice(i,1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+function checkout(){
+    document.getElementById("msg").innerText = "✅ Order placed!";
+    localStorage.removeItem("cart");
+    renderCart();
+}
+
+renderCart();
+</script>
+
+</body>
+</html>

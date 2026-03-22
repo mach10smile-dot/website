@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav>
+<h1>Pinoy Eats</h1>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="menu.html">Menu</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="contact.html">Contact</a></li>
+</ul>
+</nav>
+
+<div class="section">
+<h2>Contact Us</h2>
+<p>Email: pinoyeats@email.com</p>
+<p>Phone: 09123456789</p>
+<p>Location: Philippines</p>
+</div>
+
+
+
+<div class="cart-icon" onclick="goToCart()">
+🛒 <span id="cart-count">0</span>
+</div>
+
+<script>
+function goToCart(){
+    window.location.href = "cart.html";
+}
+
+function updateCartCount(){
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    document.getElementById("cart-count").innerText = cart.length;
+}
+
+updateCartCount();
+</script>
+
+</body>
+</html>
